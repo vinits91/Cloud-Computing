@@ -1,0 +1,28 @@
+Test Bed Environment: Linux EC2, Amazon Web Service
+
+Now to Install JDK/ANT/GCC on AWS instance use following command after Transfering Basic_Install.sh to AWS instance
+
+chmod +x Basic_Install.sh
+./Basic_Install.sh
+
+To execute the Local In memory queue:
+
+Transfer local.jar to aws instance along with workload_file.txt and invoke following command
+
+java -jar local.jar client –s LOCAL t 4 w workload_file.txt
+
+
+To execute the Remote workers SQS:
+
+First start the workers:
+
+Transfer workers.jar to aws instance along with credentials file and invoke following command
+
+java -jar workers.jar worker –s sqs –t 1
+
+Now start the client:
+
+Transfer client.jar to aws instance along with credentials file and workload_file.txt and invoke following
+
+java -jar client.jar client –s sqs w workload_file.txt
+

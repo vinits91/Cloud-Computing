@@ -1,0 +1,69 @@
+Test Bed Environment: Linux EC2, Amazon Web Service
+
+Now to Install JDK/ANT/GCC on AWS instance use following command after Transfering Scripts.sh to AWS instance
+
+chmod +x Scripts.sh
+./Scripts.sh
+
+To Run Code:
+
+	Copy the CloudPA1NetworkServer  and CloudPA1NetworkClient (new instance) to AWS Instance
+	
+	To Run code For Network:
+	
+	Open the ClientConfig.properties file, and change the following parameters according to the requirements:
+	
+ 	numberofthreads=1 or 2
+	tcporudp=tcp or udp
+	sizeudp= 1 or 1024 or 65520 //size for UDP packet
+	ipaddress=IP_address of server
+	port= 5764
+
+	
+	Open ServerConfig.properties file and change following
+	
+	evaluation=3
+	port=5764
+	tcporudp=tcp or udp
+	sizeudp=1024  //size for UDP packet should be same as Client
+
+	now in terminal for both the instances of Client and Server
+	
+	Execute Following command
+	
+	ant run
+
+
+	
+To Run Disk Benchmark:
+
+	Open ServerConfig.properties file and change following
+	evaluation=2
+	randomorseq=random/seq
+	readorwrite=read/write
+	numberofthreads=1/2
+
+ 	Execute Following command
+	
+	ant run
+
+To Run Cpu Benchmark
+
+	Transfer Cpu.c file to amazon instance and execute following
+	
+	gcc Cpu.c -o Cpu -pthread
+	./Cpu
+
+
+	
+	
+
+	
+
+	
+	
+	
+	
+
+
+

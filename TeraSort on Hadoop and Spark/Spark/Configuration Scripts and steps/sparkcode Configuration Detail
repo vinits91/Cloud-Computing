@@ -1,0 +1,72 @@
+
+#Download the sparks latest Distribution
+
+#Navigate to spark/ec2 folder
+export AWS_ACCESS_KEY_ID=AccessKey
+export AWS_SECRET_ACCESS_KEY=Secretkey
+
+Chmod 400 pathToPemFile
+
+
+#Configure and start the Spark Master Slave Cluster on Ec2
+
+./spark-ec2 -k spark -i /home/vinit/Desktop/spark.pem -s 1 -t d2.xlarge --spot-price=0.10 launch Spark-master
+
+#Login to Spark Cluster
+
+./spark-ec2 -k spark -i /home/vinit/Desktop/spark.pem login Spark-master
+
+
+
+#Navigate to Spark Configuration folder in EC2 spark cluster
+
+cd spark/conf/
+
+#Open the spark Environment file and add export line as following
+nano spark-env.sh
+export SPARK_WORKER_MEMORY=1g  //save the file
+
+#Copy the configuration to all slave
+
+~/spark-ec2/copy-dir /root/spark/conf/
+
+#move the gensort script to Ec2 using filezilla
+#generate dataset using gensort
+#navigate to/64 directory and generate data 
+
+cd /root/
+chmod +x install-gensort.sh
+./install-gensort.sh
+cd /root/64
+./gensort -a 10000000 inputfile.txt
+
+
+
+
+#put file into Hdfs
+cd ephemeral-hdfs/bin/
+./hadoop fs -put /root/inputfile.txt /src
+
+
+# open the spark shell
+#transfer the sort.scala to root directory on ec2 the follow following
+ cd /root/spark/bin/
+./spark-shell -i /root/sort.scala 
+
+
+#exit the spark shell using following
+exit
+
+#load the sorted output from hdfs  to local
+
+cd /root/ephemeral-hdfs/bin/
+
+
+#list the output in hdfs
+./hadoop fs -ls /
+
+./hadoop fs -copyToLocal /root /vinit/output
+
+#concatenate the the all file into one.
+cat /vinit/output/out1/* > /vinit/output.txt
+

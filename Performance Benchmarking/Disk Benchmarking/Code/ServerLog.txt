@@ -1,0 +1,282 @@
+[2016-01-27 13:57:39.031] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 13:58:37.628] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:02:21.006] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:02:39.425] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:03:10.687] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:23:50.065] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:43:14.266] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:47:36.053] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:48:43.560] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:48:59.489] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:49:48.665] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:50:09.761] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:50:51.280] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:54:18.079] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 14:59:00.350] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:03:19.583] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:12:10.267] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:20:51.778] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:21:58.635] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:23:59.567] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-27 15:25:50.141] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-01-30 20:32:23.661] Exception: RandomAccess :: readSeq Output.txt (The system cannot find the file specified)
+[2016-01-30 20:34:04.618] Exception: RandomAccess :: readSeq Output.txt (The system cannot find the file specified)
+[2016-02-01 20:11:30.594] Exception: RandomAccess :: readRandom DiskFile.txt (The system cannot find the file specified)
+[2016-02-01 20:12:01.544] Exception: RandomAccess :: readRandom DiskFile.txt (The system cannot find the file specified)
+[2016-02-01 20:12:01.546] Exception: RandomAccess :: readRandom DiskFile.txt (The system cannot find the file specified)
+[2016-02-01 23:45:47.219] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-01 23:46:01.664] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-01 23:46:20.185] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-01 23:48:06.839] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-01 23:51:26.810] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-01 23:57:50.676] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-01 23:59:03.979] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 00:04:29.377] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 09:30:53.759] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 09:32:26.435] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 09:33:01.642] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 09:54:04.373] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 09:55:26.044] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 09:57:56.783] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 09:58:21.150] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 09:59:36.898] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 10:00:06.325] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 10:50:07.252] Exception while Reading data from client in server.: IOException
+Software caused connection abort: recv failed
+[2016-02-02 10:51:28.113] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 10:53:14.285] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 10:53:38.087] Exception while Reading data from client in server.: IOException
+Software caused connection abort: recv failed
+[2016-02-02 10:57:04.986] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 12:49:25.446] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 17:11:58.253] Exception: RandomAccess :: writeRandom DiskFile.txt (The system cannot find the file specified)
+[2016-02-02 17:12:11.560] Exception: RandomAccess :: writeRandom DiskFile.txt (The system cannot find the file specified)
+[2016-02-02 18:51:40.471] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 18:53:05.946] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-02 19:03:41.602] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:03:42.305] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:03:44.593] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:05:24.138] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:05:24.838] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:05:27.173] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:06:19.354] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:06:21.224] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:06:22.286] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:06:50.346] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:06:51.049] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:06:53.462] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:12:14.125] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:12:16.751] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:12:17.703] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:15:10.347] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:15:11.278] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:15:14.073] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:16:59.027] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:16:59.890] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:17:00.722] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:18:46.998] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:18:47.614] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:18:50.572] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:22:47.341] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:23:56.213] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:24:30.567] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:24:32.895] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:25:11.667] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:25:12.347] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:25:14.775] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:25:25.677] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:25:26.334] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:25:28.562] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:27:24.786] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:27:25.502] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:27:27.763] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:27:38.508] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:27:39.473] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:27:42.852] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:28:55.995] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:28:56.663] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:28:59.186] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:29:13.877] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:29:14.553] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:29:16.795] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:30:49.552] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:30:50.444] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:30:53.343] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-02 19:31:01.503] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:31:02.150] Exception while Reading data from client in server.: IOException
+null
+[2016-02-02 19:31:04.274] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 19:22:53.660] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:22:54.322] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:22:58.057] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:22:58.057] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:23:00.623] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:23:01.598] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 19:25:23.421] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:25:24.548] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:25:28.380] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 19:26:14.219] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:26:15.114] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:26:18.710] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 19:33:25.548] Error While Creating the Server Socket. : IOException
+Address already in use: JVM_Bind
+[2016-02-06 19:34:14.297] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:34:15.505] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:34:19.414] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:34:24.688] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 19:56:36.006] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 19:56:37.442] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:03:39.995] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:03:41.460] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:16:07.743] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:18:28.510] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:18:34.419] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:31:59.122] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:32:01.140] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:34:32.070] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:34:32.071] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:34:32.072] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:44:14.051] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:44:14.063] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:44:14.098] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:44:15.249] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-06 20:44:59.576] Exception while Reading data from client in server.: IOException
+null
+[2016-02-06 20:45:01.244] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-07 00:41:49.009] Exception in UdpServer :: runUdpServer method Address already in use: Cannot bind
+[2016-02-07 15:42:27.567] Exception in UdpServer :: runUdpServer method Address already in use: Cannot bind
+[2016-02-07 16:55:36.051] Exception in UdpServer :: runUdpServer method Address already in use: Cannot bind
+[2016-02-07 18:07:59.190] Exception while Reading data from client in server.: IOException
+null
+[2016-02-07 18:08:00.988] Exception while Reading data from client in server.: IOException
+Connection reset
+[2016-02-07 19:07:36.806] Exception while Reading data from client in server.: IOException
+null

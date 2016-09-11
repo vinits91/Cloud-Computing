@@ -1,0 +1,148 @@
+#Following changes are required to be done:
+
+cd hadoop/etc/hadoop/
+
+ls
+
+#we need to change 5 files given in folder named "HadoopFiles Required to be changed"
+
+mapred-site.xml
+core-site.xml
+hdfs-site.xml
+yarn-site.xml
+hadoop-env.sh
+
+
+Now go to hadoop/bin 
+
+add the master's address in Slaves file.
+like following
+add master DNS
+
+
+
+Mount Disk a Disk using script provided following for D2.xlarge
+
+RaidScript.sh file
+
+
+format name node
+
+./hadoop namenode -format
+
+Now go to hadoop/sbin folder 
+
+./start-all.sh
+
+execute jps
+it should display 
+
+15627 DataNode
+16002 ResourceManager
+15840 SecondaryNameNode
+16470 Jps
+16165 NodeManager
+15457 NameNode
+
+
+
+
+Go to mounted drive and generate file using gensort
+
+create new directory in hdfs
+
+bin/hadoop fs -mkdir /src
+
+put the generated file to hdfs
+
+bin/hadoop fs -put /vinit/64/inputfile /src
+
+Off the safe mode
+bin/hadoop dfsadmin -safemode leave
+
+running Tera Sort
+
+bin/hadoop jar "path to your sorting jar file" "jar name" /src output
+
+
+//fetching output to local disk
+
+bin/hadoop fs -get output /vinit/Output1Gb
+
+
+Go to output file
+
+cd /vinit/Output1Gb/
+
+get the Head and Tail of output
+
+head -10 part-r-00000 
+
+tail -10 part-r-00000 
+
+
+
+
+
+
+--------------------Changes required to configure  16 Nodes Cluster --------------------------------------------------
+
+
+Create the instance as above and follow all the steps untill Mount Disk step:
+
+
+Change in hosts file
+
+cd /etc
+sudo nano hosts
+
+add the public DNS and Private IP of master
+
+create the Images of Instance on AWS
+
+open the terminator (application where you can run multiple terminal in broadcast mode)
+
+In Master's
+/etc/hosts //add all Ips of slaves
+
+ 
+In slaves /etc/hosts instance add all its own IP and master's IP
+
+In master's slaves file add all the ips of slave instances
+
+now generate Keygen in master 
+
+eval "$(ssh-agent)"
+
+chmod 400 cloud.pem
+ssh-add cloud.pem
+
+ssh-keygen -t rsa
+
+ ssh-copy-id -i ~/.ssh/id_rsa.pub "public DNS for master"
+
+ Follow the following for all slaves
+ 
+ssh-copy-id -i ~/.ssh/id_rsa.pub "public DNS of slave"
+
+after adding in all slaves provide the permission
+
+chmod 0600 ~/.ssh/authorized_keys 
+
+
+Now start with namenode format like a regular configuration as above
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

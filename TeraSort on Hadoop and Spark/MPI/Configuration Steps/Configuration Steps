@@ -1,0 +1,46 @@
+#execute the following command on your local Ubuntu machine
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-dev
+sudo apt-get install python-setuptools
+sudo easy_install StarCluster
+starcluster help
+# enter 2 in selection
+#now open the config file
+sudo nano ~/.starcluster/config
+
+#in aws_info add your AWS_ACCESS_KEY, Secret Key and AWS account ID
+
+# now create the the Public/private RSA key for starcluster
+
+starcluster createkey mykey -o ~/.ssh/mykey.rsa
+
+sudo nano ~/.starcluster/config
+
+#set the spot_bid, Plugin as specified in http://star.mit.edu/cluster/docs/0.93.3/plugins/mpich2.html
+#in your starcluster config file
+
+change the [global cluster] in  ~/.starcluster/config file to largecluster
+
+#starting the star Cluster
+
+starcluster start mpicluster
+
+
+# SSH into master Node
+
+starcluster sshmaster mpicluster 
+
+#Terminating the star Cluster 
+
+starcluster terminate mpicluster
+
+
+
+--------------------------------- For 16 Nodes --------------------------------------------------
+
+To setup a  Star Cluster for 16 Nodes :
+
+Change the following line in sudo nano ~/.starcluster/config to as below
+
+CLUSTER_SIZE = 16 #this will create the star cluster of 16 Nodes

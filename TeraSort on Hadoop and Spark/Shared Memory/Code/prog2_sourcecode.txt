@@ -1,0 +1,399 @@
+SharedMemorySortingMain class:
+
+package com.sharedmemory;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+//main calss of shared memory sort
+public class SharedMemorySortingMain {
+	static PropertyBuilder propertiesController = new PropertyBuilder();//property builder to fetch the property from config file
+	static int flag=0;
+	static PriorityQueue<FileBuffer> pqueue;//PriorityQueue used to keep the track of most recent data
+	static Comparator<String> cmp;
+	static List<File> listOfSortedFiles = new ArrayList<File>();//keep the track of sorted list of file
+	static double diff;
+	static long d, s, totalTimeDifference;//time calculation variable
+	static int totalThreads;//keep track of number of threads
+	static List<Thread> threadList = new ArrayList<>();
+	
+	
+	//main function to sort the data 
+	//inputfile is : inputfile.txt
+	//outputfile is: outputfile.txt
+	public static void main(String[] args) {
+		File inputFile = new File("/vinit/inputfile.txt");
+		cmp = getComparator();
+		s = System.nanoTime();
+		totalThreads = Integer.parseInt(propertiesController.getProperty("totalthreads"));
+		sortInputFile(cmp, inputFile,flag);
+		threadList.clear();
+		flag=1;
+		File outputFile = new File("/vinit/outputfile.txt");
+		mergeSort(listOfSortedFiles, flag,outputFile, cmp);
+		d = System.nanoTime();
+		totalTimeDifference = (d - s);
+		diff = totalTimeDifference / 1e6;
+		Log.infoRandomAccess(diff);
+
+	}
+
+	//called to get the sorted file
+	public static void sortInputFile(Comparator<String> cmp, File file,int flag) {
+		long blocksize=getBlockSize(file);
+		
+		//thread for multi-thraeding
+		for (int i = 0; i < totalThreads; i++) {
+			threadList.add(new Thread(new SortData(cmp, blocksize)));
+		}
+		try {
+			for (int i = 0; i < threadList.size(); i++) {
+				threadList.get(i).start();
+			}
+			for (int i = 0; i < threadList.size(); i++) {
+				threadList.get(i).join();
+			}
+		} catch (InterruptedException e) {
+			Log.error(e.getStackTrace());
+		}
+		listOfSortedFiles.addAll(SortData.getFiles());
+	}
+
+
+	//gets the blocksize based on availble memory
+	private static long getBlockSize(File file) {
+		return EstimateBlockSize.getSizeOfBlock(file);
+	}
+
+	//called to merge the file
+	public static void mergeSort(List<File> files, int flag,File outputfile, final Comparator<String> cmp) {
+		try {
+			if(flag==1){
+				pqueue = new PriorityQueue<FileBuffer>(1, new FileCompartor());
+				flag=0;
+			}
+			
+			pqueue=FileCompartor.populatePriorityQueue(pqueue,files);
+			
+			for (int i = 0; i < totalThreads; i++) {
+				threadList.add(new Thread(new MergeData(pqueue)));
+			}
+
+			for (int i = 0; i < threadList.size(); i++) {
+				threadList.get(i).start();
+			}
+			for (int i = 0; i < threadList.size(); i++) {
+				threadList.get(i).join();
+			}
+
+		} catch (NullPointerException | InterruptedException exception) {
+			Log.error(exception.getStackTrace());
+		}
+
+	}
+
+	public static Comparator<String> getComparator() {
+		CustomComparator comparator=new CustomComparator();
+		return comparator;
+	}
+}
+
+
+EstimateBlockSize class:
+
+package com.sharedmemory;
+
+import java.io.File;
+//estimates the blocks size based on available memeory
+public class EstimateBlockSize {
+
+	public static long getSizeOfBlock(File file) {
+		final int MAX_TEMP= 2048;
+		long fileSize = file.length();
+		long bSize = fileSize / MAX_TEMP;
+		bSize = getBSize(bSize);
+		return bSize;
+	}
+}
+
+
+FileComparator Class:
+
+package com.sharedmemory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class FileCompartor implements Comparator<FileBuffer> {
+
+	@Override
+	public int compare(FileBuffer file1, FileBuffer file2) {
+		return SharedMemorySortingMain.cmp.compare(file1.getTopElement(), file2.getTopElement());
+	}
+	//compartor classs which will used to fetch the priority queue
+	public static PriorityQueue<FileBuffer> populatePriorityQueue(PriorityQueue<FileBuffer> priorityQueue,List<File> files){
+		for(int i=0;i<files.size();i++){
+			FileBuffer bfb;
+			try {
+				bfb = new FileBuffer(files.get(i));
+				priorityQueue.add(bfb);
+			} catch (IOException e) {
+				Log.error(e.getStackTrace());
+			}
+			
+		}
+		return priorityQueue;
+	}
+}
+
+Log Class:
+
+package com.sharedmemory;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Log {
+	static BufferedWriter bufferedWriter = null;
+	static File log = new File("errorlog.txt");
+
+	static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	//used to log the error during execution for easy debug
+	public static synchronized void error(StackTraceElement[] stackTraceElements) {
+		try {
+			bufferedWriter = new BufferedWriter(new FileWriter(log, true));
+			bufferedWriter.append("[" + dateFormat.format(new Date()) + "] " + stackTraceElements.toString());
+			bufferedWriter.newLine();
+		} catch (IOException e) {
+
+		} finally {
+			try {
+				bufferedWriter.close();
+			} catch (IOException e) {
+
+			}
+		}
+	}
+	
+	public static void infoRandomAccess(double time) {
+		try {
+			File randomAccessLog = new File("TimeRandomAccess");
+			bufferedWriter = new BufferedWriter(new FileWriter(randomAccessLog, true));
+			bufferedWriter.append(new DecimalFormat("#.#################").format(time) + ",");
+
+		} catch (IOException e) {
+
+		} finally {
+			try {
+				bufferedWriter.close();
+			} catch (IOException e) {
+
+			}
+		}
+	}
+
+}
+
+SortData:
+
+package com.sharedmemory;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+//sort the data using mergesort implemented on file level
+public class SortData implements Runnable {
+
+	static List<File> files = new ArrayList<File>();
+	Comparator<String> comparator;
+	File file;
+	long bSize;
+	static BufferedReader bufferedReader;
+	static String inputFile = "inputfile.txt";
+	static List<String> listOfTempFiles = new ArrayList<String>();
+	String sentence = "";
+	File tempFile;
+
+	static {
+		try {
+			bufferedReader = new BufferedReader(new FileReader(new File(inputFile)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public SortData(Comparator<String> cmp, long blocksize) {
+		this.comparator = cmp;
+		this.bSize = blocksize;
+
+	}
+
+	@Override
+	public void run() {
+		long currBsize = 0;
+		try {
+			try {
+				while (sentence != null) {
+					synchronized (bufferedReader) {
+						if ((currBsize < bSize)) {
+							while (((sentence = bufferedReader.readLine()) != null)) {
+								listOfTempFiles.add(sentence);
+								currBsize = currBsize + sentence.length();
+								try {
+							bufferedReader = new BufferedReader(new FileReader(new File(inputFile)));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+							}
+						}
+						setTempFiles(sortFiles(listOfTempFiles, comparator));
+						tempFile.delete();
+					}
+					currBsize = 0;
+				}
+
+			} catch (EOFException oef) {
+				if (listOfTempFiles.size() > 0) {
+					try {
+						setTempFiles(sortFiles(listOfTempFiles, comparator));
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
+
+				}
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+		} finally {
+
+		}
+	}
+
+	public File sortFiles(List<String> tempFileList, Comparator<String> cmp) throws IOException {	
+		sort(tempFileList, 0, tempFileList.size() - 1);
+		tempFile.deleteOnExit();
+		return tempFile;
+
+	}
+
+	public static void setTempFiles(File file) {
+		files.add(file);
+		listOfTempFiles.clear();
+	}
+
+	public static List<File> getFiles() {
+		return files;
+	}
+
+	public BufferedWriter getWriter() {
+		File file = new File("/vinit");
+		BufferedWriter bufferedWriter = null;
+		try {
+			tempFile = File.createTempFile("temp", "file", file);
+			bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
+
+		} catch (IOException e) {
+			Log.error(e.getStackTrace());
+		}
+		return bufferedWriter;
+	}
+
+	public void sort(List<String> tempFileList, int low, int high) throws IOException {
+		if (low < high) {
+			int middle = low + (high - low) / 2;
+			sort(tempFileList, low, middle);
+			sort(tempFileList, middle + 1, high);
+			MergePartition(tempFileList, low, middle, high);
+		}
+		BufferedWriter bufferedWriter = getWriter();
+		try {
+			for (String r : tempFileList) {
+				bufferedWriter.write(r);
+				bufferedWriter.newLine();
+			}
+		} finally {
+			bufferedWriter.close();
+		}
+
+	}
+
+	private void MergePartition(List<String> tempFileList,int lowerIndex, int middle, int higherIndex) {
+	List<String>	tempMergArr=new ArrayList<String>();
+        for (int i = lowerIndex; i <= higherIndex; i++) {
+        	tempMergArr.add(tempFileList.get(i));
+        }
+        int i = lowerIndex;
+        int j = middle + 1;
+        while (i <= middle && j <= higherIndex) {
+            if (tempMergArr.get(i).compareTo(tempMergArr.get(j))==1) {
+            	tempFileList.add(tempMergArr.get(i));
+                i++;
+            } else {
+            	tempFileList.add(tempMergArr.get(j));
+                j++;
+            }
+        }
+        while (i <= middle) {
+        	tempFileList.add(tempMergArr.get(i));
+            i++;
+        }
+ 
+    }
+
+}
+
+
+PropertyBuilder Class:
+
+package com.sharedmemory;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class PropertyBuilder {
+
+	Properties properties = new Properties();
+
+	public PropertyBuilder() {
+		try {
+			InputStream inputStream = new FileInputStream("Config.properties");
+			properties.load(inputStream);
+		} catch (IOException e) {
+			
+		}
+	}
+
+	public  String getProperty(String key) {
+		String val = properties.getProperty(key);
+		return val;
+	}
+
+}
+
+
+
+
+

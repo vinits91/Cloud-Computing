@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+	<!--Creates the build file with classes -->
+	<target name="compile">
+		<mkdir dir="build/classes" />
+		<javac srcdir="src" destdir="build/classes" includeantruntime="false"/>
+	</target>
+
+	<!--Compiles and manages the jar file creation with Information regarding Main File-->
+	<target name="jar" depends="compile">
+		<mkdir dir="build/jar" />
+		<jar destfile="build/jar/worker.jar" basedir="build/classes">
+			<manifest>
+				<attribute name="Main-Class" value="com.remote.sqs.Workers" />
+			</manifest>
+		</jar>
+	</target>
+	<!--Clean Build -->
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+</project>
